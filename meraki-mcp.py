@@ -18,15 +18,29 @@ MERAKI_ORG_ID = os.getenv("MERAKI_ORG_ID")
 # Initialize Meraki API client using Meraki SDK
 dashboard = meraki.DashboardAPI(api_key=MERAKI_API_KEY, suppress_logging=True)
 
+# Create network in Meraki
+@mcp.tool()
+def create_network(name: str, tags: list[str], productTypes: list[str], copyFromNetworkId: str = None) -> str:
+    """Create a new network in Meraki, optionally copying from another network."""
+    kwargs = {}
+    if copyFromNetworkId:
+        kwargs['copyFromNetworkId'] = copyFromNetworkId
+    network = dashboard.organizations.createOrganizationNetwork(MERAKI_ORG_ID, name, productTypes, tags=tags, **kwargs)
+    return json.dumps(network, indent=2)
+
+# Delete network in Meraki
+@mcp.tool()
+def delete_network(network_id: str) -> str:
+    """Delete a network in Meraki"""
+    dashboard.networks.deleteNetwork(network_id)
+    return f"Network {network_id} deleted"
+
+
 # Get networks from Meraki
 @mcp.tool()
 def get_networks() -> str:
     """Get a list of networks from Meraki"""
     networks = dashboard.organizations.getOrganizationNetworks(MERAKI_ORG_ID)
-    network_id_list = []
-    for network in networks:
-        network_id_list.append(network["id"])
-    return network_id_list
     return json.dumps(networks, indent=2)
 
 # Get devices from Meraki
