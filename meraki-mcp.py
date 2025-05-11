@@ -85,6 +85,20 @@ async def get_client_policy(network_id: str, client_id: str) -> str:
     )
     return json.dumps(policy, indent=2)
 
+# Claim devices into the Meraki organization
+@mcp.tool()
+def claim_devices(network_id: str, serials: list[str]) -> str:
+    """Claim one or more devices into a Meraki network"""
+    dashboard.networks.claimNetworkDevices(network_id, serials)
+    return f"Devices {serials} claimed into network {network_id}"
+
+# Update devices in the Meraki organization
+@mcp.tool()
+def update_devices(serial: str, update_fields: dict) -> str:
+    """Update a device in the Meraki organization. Pass a dictionary of fields to update (e.g., { 'address': '1234 Main St', 'name': 'Device1' })."""
+    dashboard.devices.updateDevice(serial, **update_fields)
+    return f"Device {serial} updated with {update_fields}"
+
 # Define resources
 #Add a dynamic greeting resource
 @mcp.resource("greeting: //{name}")
