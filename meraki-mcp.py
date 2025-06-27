@@ -202,6 +202,14 @@ def get_organization_license(org_id: str = None) -> str:
     license_state = dashboard.organizations.getOrganizationLicensesOverview(organization_id)
     return json.dumps(license_state, indent=2)
 
+# Get organization configuration changes
+@mcp.tool()
+def get_organization_conf_change(org_id: str = None) -> str:
+    """Get the org change state for an organization"""
+    organization_id = org_id or MERAKI_ORG_ID
+    org_config_changes = dashboard.organizations.getOrganizationConfigurationChanges(organization_id)
+    return json.dumps(org_config_changes, indent=2)
+
 #######################
 # NETWORK TOOLS       #
 #######################
