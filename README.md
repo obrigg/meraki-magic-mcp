@@ -268,59 +268,6 @@ This guide provides a comprehensive overview of all the network tools available 
 
 ---
 
-## Usage Examples
-
-### Basic Network Operations
-```python
-# Get all networks
-networks = get_networks()
-
-# Get network details
-network_details = get_network_details("L_123456789")
-
-# Get devices in a network
-devices = get_network_devices("L_123456789")
-```
-
-### Wireless Management
-```python
-# Get wireless SSIDs
-ssids = get_wireless_ssids("L_123456789")
-
-# Update SSID settings
-ssid_settings = SsidUpdateSchema(
-    name="Guest WiFi",
-    enabled=True,
-    authMode="open",
-    visible=True
-)
-update_wireless_ssid("L_123456789", "0", ssid_settings)
-```
-
-### Device Management
-```python
-# Ping a device
-ping_result = ping_device("Q2XX-XXXX-XXXX", "192.168.1.1", 5)
-
-# Blink device LEDs
-blink_result = blink_device_leds("Q2XX-XXXX-XXXX", 10)
-```
-
-### Network Automation
-```python
-# Create an action batch
-actions = [
-    {
-        "resource": "/networks/L_123456789/devices/Q2XX-XXXX-XXXX",
-        "operation": "update",
-        "body": {"name": "Updated Device Name"}
-    }
-]
-batch = create_action_batch("123456", actions, confirmed=True)
-```
-
----
-
 ## Schema Definitions
 
 The MCP includes comprehensive Pydantic schemas for data validation:
