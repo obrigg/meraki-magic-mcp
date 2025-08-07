@@ -480,12 +480,7 @@ def get_wireless_settings(network_id: str) -> str:
     settings = dashboard.wireless.getNetworkWirelessSettings(network_id)
     return json.dumps(settings, indent=2)
 
-# Get wireless clients
-@mcp.tool()
-def get_wireless_clients(network_id: str, timespan: int = 86400) -> str:
-    """Get wireless clients for a network"""
-    clients = dashboard.wireless.getNetworkWirelessClients(network_id, timespan=timespan)
-    return json.dumps(clients, indent=2)
+
 
 #######################
 # SWITCH TOOLS        #

@@ -179,7 +179,6 @@ This guide provides a comprehensive overview of all the network tools available 
 - **`get_wireless_ssids(network_id)`** - Get wireless SSIDs for a network
 - **`update_wireless_ssid(network_id, ssid_number, ssid_settings)`** - Update a wireless SSID
 - **`get_wireless_settings(network_id)`** - Get wireless settings for a network
-- **`get_wireless_clients(network_id, timespan)`** - Get wireless clients for a network
 
 ### Advanced Wireless Management
 - **`get_wireless_rf_profiles(network_id)`** - Get wireless RF profiles for a network
